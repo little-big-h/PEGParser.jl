@@ -115,7 +115,7 @@ function parseGrammar(grammar_name::Symbol, expr::Expr, pdata::ParserData)
   end
 
   for rule in all_rules
-    if typeof(rule.action) != Function
+    if ! (typeof(rule.action) <: Function)
       dot = Expr(:(.), rule, QuoteNode(:action))
       fn = Expr(:(->),
         Expr(:tuple, :rule, :value, :first, :last, :children),
